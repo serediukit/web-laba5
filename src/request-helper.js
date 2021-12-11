@@ -1,6 +1,8 @@
+import { token } from "./store";
+import { get } from "svelte/store";
 class RequestHelper {
   constructor() {
-    this.API_URL = "https://web-labaa-3.herokuapp.com/v1/graphql";
+    this.API_URL = "https://web-laabaa-5.herokuapp.com/v1/graphql";
   }
 
   async fetchGraphQL(operationsDoc, operationName, variables) {
@@ -11,6 +13,9 @@ class RequestHelper {
         variables: variables,
         operationName: operationName,
       }),
+      headers: {
+        Authorization: `Bearer ${get(token)}`,
+      },
     });
 
     return await result.json();
